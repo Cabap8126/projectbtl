@@ -1,0 +1,27 @@
+extends ../../Layout/layout.pug
+block main 
+    h1 Danh sách sinh viên 
+    table(class="table table-hover table-sm table-bordered table-dark")
+                thead  
+                    tr  
+                        th STT
+                        th Mã Sinh Viên
+                        th Tên Sinh Viên 
+                        th Điểm CC1
+                        th Điểm CC2
+                        th Điểm TH1
+                        th Điểm TH2 
+                        th Tổng điểm
+                tbody 
+                    each item,index in dssv.dssv
+                        tr
+                            td #{index + 1}
+                            td #{item.masv}
+                            td #{item.tensv}
+                            td #{item.cc1}
+                            td #{item.cc2}
+                            td #{item.th1}
+                            td #{item.th2}
+                            td #{((item.cc1 + item.cc2) * 0.05 + item.th1 * 0.4 + item.th2*0.5).toFixed(2)}
+                            td 
+                                a(href=`/gv/edit/${dssv._id}/${item.masv}` class="btn btn-warning btn-sm") Sửa

@@ -1,0 +1,30 @@
+extends ../../Layout/layout.pug
+include ../../mixins/alert.pug
+block main
+    +alert-success(5000)
+    +alert-error(5000)
+    h1(class="text-left") chỉnh sửa điểm
+    .container.my-5
+        .row.justify-content-left
+            .col-12 
+                form(action=`/gv/edit/${diem._id}/${ttsv._id}` method="POST")
+                    div(class="form-group")
+                        label(for="tensv") Tên sinh viên
+                        input(type="text" class="form-control" name="tensv" id="tensv" value=ttsv.tensv disabled)
+                    div(class="form-group")
+                        label(for="masv") Mã sinh viên
+                        input(type="text" class="form-control" name="masv" id="masv" value=ttsv._id disabled )
+                    div(class="form-group")
+                        label(for="cc1") CC1
+                        input(type="number" class="form-control" name="cc1" id="cc1" value=ttsv.cc1 required)
+                    div(class="form-group")
+                        label(for="cc2") CC2
+                        input(type="number" class="form-control" name="cc2" id="cc2" value=ttsv.cc2 required)
+                    div(class="form-group")
+                        label(for="th1") Th1
+                        input(type="number" class="form-control" name="th1" id="th1" value=ttsv.th1 required)
+                    div(class="form-group")
+                        label(for="th2") Th2
+                        input(type="number" class="form-control" name="th2" id="th2" value=ttsv.th2 required)
+                    div(class="form-group")
+                        button(type="submit" class="btn btn-primary btn-block") Cập nhập

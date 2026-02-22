@@ -1,0 +1,8 @@
+extends ../../Layout/layout.pug
+block main 
+    if(objtb && objtb.title)
+        h2 Thông báo : #{objtb.title}
+        p Nội dung : #{objtb.noidung}
+    else
+        p Thông báo không tồn tại
+    

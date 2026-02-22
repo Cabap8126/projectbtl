@@ -1,0 +1,7 @@
+extends ../../Layout/layout.pug
+block main 
+    h4 Tên : #{svien.tensv}
+    h5 email : #{svien.email}
+    h5 môn hoc : 
+    each item in svien.dsmon 
+        p  - #{item.tenmh} 

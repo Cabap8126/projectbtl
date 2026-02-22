@@ -1,0 +1,18 @@
+extends ../../Layout/layout.pug
+include ../../mixins/alert.pug
+block main
+    h1 File bài giảng
+    .card.mb-3
+        .card-header Danh sách
+        .card-body
+            .row
+                if(file.length > 0 )
+                    ul
+                        each item in file
+                            li
+                                a(href=item.path download) #{item.tenfile}
+                else
+                    p Chưa có file nào
+
+
+                

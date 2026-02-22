@@ -1,0 +1,18 @@
+extends ../../Layout/layout.pug
+include ../../mixins/alert.pug
+block main
+    +alert-success(5000)
+    +alert-error(5000)
+    .container.my-5
+        .row.justify-content-left
+            .col-12
+                h1(class="text-left") Thêm môn giảng
+                form(action=`/gv/create/${idgv}` method="POST")
+                    div(class="form-group")
+                        label(for="tenMd") Môn giảng
+                        input(type="text" class="form-control" id="tenMd" name="tenMd" required)
+                    div(class="form-group")
+                        label(for="maMd") Mã Môn
+                        input(type="maMd" class="form-control" id="maMd" name="maMd" required) 
+                    div(class="form-group")
+                        button(type="submit" class="btn btn-primary btn-block") tạo Mới

@@ -1,0 +1,25 @@
+extends ../../Layout/layout.pug
+block main 
+    h1 Danh sách môn giảng
+    .card.mb-3
+        .card-header Danh sách
+        .card-body
+            .row
+                .col-8
+                .col-4.text-right
+                    a(href=`/gv/create/${monday._id}` class="btn btn-outline-success") + Thêm môn 
+            table(class="table table-hover table-sm table-bordered table-light" )
+                thead  
+                    tr  
+                        th STT
+                        th Môn giảng
+                        th Mã môn
+                        th Hành Động
+                tbody
+                    each item,index in monday.monday
+                        tr
+                            td #{index+1}
+                            td #{item.tenMd}
+                            td #{item.maMd}
+                            td
+                                a(href=`/gv/deleted/${monday._id}/${item.maMd}` class="btn btn-danger btn-sm-ml-1") Xóa

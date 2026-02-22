@@ -1,0 +1,14 @@
+extends ../../Layout/layout.pug
+block main
+    h1 Danh sách mon
+    .row.mt-4 
+        each item in dsmon
+            .col-6 
+                .card.mb-4 
+                    .card-header Lớp : #{item.nameCls} ( #{item.mamh} )
+                    .card-body.d-flex.justify-content-between.align-items-center
+                        a(href=`/sv/diem/${item._id}`) Điểm
+                        a(href=`/sv/file/${item._id}`) 
+                            i.fa-regular.fa-file 
+                        a(href=`/sv/notification/${item._id}`)
+                            i.fa-solid.fa-bell 

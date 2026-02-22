@@ -1,0 +1,7 @@
+extends ../../Layout/layout.pug
+block main 
+    h4 Tên : #{gvien.tenGv}
+    h5 email : #{gvien.email}
+    h5 môn giảng : 
+    each item in gvien.monday 
+        p  - #{item.tenMd} 

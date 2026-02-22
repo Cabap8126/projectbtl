@@ -1,0 +1,15 @@
+extends ../../Layout/layout.pug
+block main 
+    .container.my-5
+    .row.justify-content-left
+        .col-12
+            h1(class="text-left") Thêm Thông báo
+            form(action=`/gv/notificationcreate/${idclass}` method="POST")
+                div(class="form-group")
+                    label(for="title") Title
+                    input(type="text" class="form-control" id="title" name="title" required)
+                div(class="form-group")
+                    label(for="noidung") Nội dung
+                    textarea(class="form-control" id="noidung" name="noidung" maxlength="1000")
+                div(class="form-group")
+                    button(type="submit" class="btn btn-primary btn-block") Thêm mới

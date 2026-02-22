@@ -1,0 +1,16 @@
+extends ../../Layout/layout.pug
+block main 
+    h1 Thông báo
+    .card.mb-3
+        .card-header Danh sách
+        .card-body
+            .row 
+                if(notification && notification.tbao.length > 0)
+                    ul
+                        each item in notification.tbao
+                            li 
+                                div(class="tbao")
+                                    div #{namegv}
+                                    a(href=`/sv/notificationDetail/${notification._id}/${item.id}`) #{item.title}     
+                else
+                    p Hiện Tại chưa có thông báo

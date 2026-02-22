@@ -1,0 +1,22 @@
+extends ../../Layout/layout.pug
+include ../../mixins/alert.pug
+block main
+    h1 File bài giảng
+    .card.mb-3
+        .card-header Danh sách
+        .card-body
+            .row
+                .col-8
+                .col-4.text-right
+                    a(href=`/gv/fileupload/${clss._id}` class="btn btn-outline-success") + Thêm File
+            .row
+                if clss.dsfile.length
+                    ul
+                        each item in clss.dsfile
+                            li
+                                a(href=item.path download) #{item.tenfile}
+                else
+                    p Chưa có file nào
+
+
+                

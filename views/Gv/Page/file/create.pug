@@ -1,0 +1,12 @@
+extends ../../Layout/layout.pug
+block main 
+    .container.my-5
+    .row.justify-content-left
+        .col-12
+            h1(class="text-left") Thêm file
+            form(action=`/gv/fileupload/${idclass}` method="POST" enctype ="multipart/form-data")
+                div(class="form-group")
+                    label(for="file") Chọn file
+                    input(type="file" class="form-control" id="file" name="file" required)
+                div(class="form-group")
+                    button(type="submit" class="btn btn-primary btn-block") Thêm mới
