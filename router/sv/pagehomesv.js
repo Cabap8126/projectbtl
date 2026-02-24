@@ -1,6 +1,6 @@
 const express = require("express")
 const controller = require("../../controller/sv/pagehome")
-const router = express();
+const router = express(); // chuyển hướng các router
 router.get("/pagehome",controller.index)
 router.get("/detail",controller.detail)
 router.get("/listclass",controller.classlist);

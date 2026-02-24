@@ -1,4 +1,5 @@
 const multer = require('multer');
+// gửi file thông qua multer (đọc thêm ở npmjs.com)
 module.exports = () => {
   const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -13,4 +14,4 @@ module.exports = () => {
     },
   });
   return storage
-} 
+} //end

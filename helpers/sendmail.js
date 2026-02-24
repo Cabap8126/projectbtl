@@ -1,4 +1,5 @@
 const nodemailer = require("nodemailer")
+// gửi mail thông qua thư viện nodemailer (ở npmjs.com)
 module.exports.sendMail = (email,subject,html) => {
     const transporter = nodemailer.createTransport({
         service: 'gmail',
@@ -23,3 +24,4 @@ module.exports.sendMail = (email,subject,html) => {
         }
     });
 }
+// end

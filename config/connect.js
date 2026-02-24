@@ -7,3 +7,4 @@ module.exports.connect = async (req,res)=>{
         console.log("connect error")
     }
 }
+// connect đến data 

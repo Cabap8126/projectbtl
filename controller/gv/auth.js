@@ -2,6 +2,7 @@ const Gvmodel = require("../../model/gv.model");
 const ForgotPsw = require("../../model/forgot.model")
 const ramdom = require("../../helpers/ramdom")
 const sendmail = require("../../helpers/sendmail")
+// kiểm tra đăng nhập
 module.exports.login = async (req,res)=>{
     if(req.cookies.token){
         res.redirect("/gv/pagehome")
@@ -13,6 +14,8 @@ module.exports.login = async (req,res)=>{
     }
 
 }
+// end
+// lấy data từ form gửi
 module.exports.loginPost = async (req,res)=>{
     const email = req.body.email;
     const password = req.body.password;
@@ -38,10 +41,13 @@ module.exports.loginPost = async (req,res)=>{
     res.cookie("token",gvien.token)
     res.redirect("/gv/pagehome")
 }
+//end
+// đăng xuất xóa cookies
 module.exports.logout = async (req,res)=>{
     res.clearCookie("token")
     res.redirect("/auth/gv/login")
-}
+}//end
+// lấy lại mạt khẩu
 module.exports.forgot = async (req,res)=>{
     res.render("Gv/Page/auth/forgot.pug",{
         pagetitle : "Quên Mk"
@@ -117,4 +123,4 @@ module.exports.resetPost = async (req,res)=>{
         }
     )
     res.redirect("/gv/pagehome")
-}
+}//end

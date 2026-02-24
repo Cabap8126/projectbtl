@@ -1,5 +1,5 @@
 const Gvmodel = require("../../model/gv.model");
-
+// kiểm tra thông tin cookies đăng nhập
 module.exports.requireAuth = async (req , res , next)=>{
     if(!req.cookies.token){
         res.redirect("/auth/gv/login")
@@ -19,3 +19,4 @@ module.exports.requireAuth = async (req , res , next)=>{
         }
     }
 }
+// end

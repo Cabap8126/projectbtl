@@ -1,5 +1,6 @@
 const ClassPr = require("../../model/class.model")
 const Gvmodel = require("../../model/gv.model")
+// lấy thông tin và trả data cho giao diện
 module.exports.index = async (req,res)=>{
     res.render("sv/Page/PgH/pagehome",{
         pagetitle : "Trang của sinh viên"
@@ -83,3 +84,4 @@ module.exports.notificationDetail = async (req,res)=>{
         objtb : objtb
     })
 }
+// end

@@ -2,6 +2,7 @@ const Svmodel = require("../../model/sv.model");
 const ForgotPsw = require("../../model/forgot.model")
 const ramdom = require("../../helpers/ramdom")
 const sendmail = require("../../helpers/sendmail")
+// kiểm tra đăng nhập
 module.exports.login = async (req,res)=>{
     if(req.cookies.token){
         res.redirect("/sv/pagehome")
@@ -38,10 +39,14 @@ module.exports.loginPost = async (req,res)=>{
     res.cookie("token",svien.token)
     res.redirect("/sv/pagehome")
 }
+//end
+// đăng xuatas
 module.exports.logout = async (req,res)=>{
     res.clearCookie("token")
     res.redirect("/auth/sv/login")
 }
+// end
+//lấy lại mật khẩu
 module.exports.forgot = async (req,res)=>{
     res.render("sv/Page/auth/forgot.pug",{
         pagetitle : "Quên Mk"
@@ -118,3 +123,4 @@ module.exports.resetPost = async (req,res)=>{
     )
     res.redirect("/sv/pagehome")
 }
+// end

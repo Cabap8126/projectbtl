@@ -1,6 +1,6 @@
 const express = require("express")
 const router = express.Router()
-const controller = require("../../controller/sv/auth")
+const controller = require("../../controller/sv/auth") // gọi đến controller
 const authvalidate = require("../../validates/sv/auth")
 router.get("/login",controller.login)
 router.post("/login",authvalidate.authValidates,controller.loginPost)

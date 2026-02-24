@@ -1,17 +1,21 @@
 const Gvmodel = require("../../model/gv.model")
 const ClassPr = require("../../model/class.model")
 const Svmodel = require("../../model/sv.model")
+// chuyển views
 module.exports.index = async ( req,res)=>{
     res.render("Gv/Page/PgH/pagehome",{
         pagetitle : "Trang của giảng viên"
     })
     
 }
+// end
+// xem thông tin chi tiết
 module.exports.detail = async (req,res)=>{
     res.render("Gv/Page/PgH/detail",{
         pagetitle : "Thông tin giảng viên"
     })
-}
+}//end
+// hiện dsach class
 module.exports.listclass = async (req,res)=>{
     const id = res.locals.gvien._id
     const dsclass = await ClassPr.find({
@@ -21,7 +25,8 @@ module.exports.listclass = async (req,res)=>{
         pagetitle : "Danh sách lớp học",
         dsclass : dsclass
     })
-}
+}//end
+// hiện dssv
 module.exports.dssv = async (req,res)=>{
     const id = req.params.id
     const dsclass = await ClassPr.findOne({
@@ -40,6 +45,8 @@ module.exports.dssv = async (req,res)=>{
         dssv: dsclass
     })
 }
+// end
+// chỉnh sửa 
 module.exports.edit = async ( req,res)=>{
     const idsv = req.params.id;
     const idclass = req.params.idclass
@@ -64,6 +71,8 @@ module.exports.edit = async ( req,res)=>{
         diem : diem
     })
 }
+// end
+//nhận data từ form
 module.exports.editPost = async (req,res)=>{
     const idsv = req.params.id;
     const idclass = req.params.idclass;
@@ -83,6 +92,8 @@ module.exports.editPost = async (req,res)=>{
     )
     res.redirect(`/gv/dssv/${lophc._id}`)
 }
+// end
+// hiển thị môn giảng
 module.exports.mongiang = async (req,res)=>{
     const token = req.cookies.token;
     const monday = await Gvmodel.findOne({
@@ -91,7 +102,7 @@ module.exports.mongiang = async (req,res)=>{
     res.render("Gv/Page/mongiang/index",{
         monday : monday
     })
-}
+}//end
 module.exports.deleted = async (req,res)=>{
     const idgv = req.params.idgv;
     const idmd = req.params.idmd
@@ -114,6 +125,7 @@ module.exports.createpost = async (req,res)=>{
     )
     res.redirect("/gv/mongiang")
 }
+// file
 module.exports.file = async (req,res)=>{
     const idclass = req.params.idclass
     const clss = await ClassPr.findOne({
@@ -136,7 +148,8 @@ module.exports.fileupdatePost = async (req,res)=>{
         {$push : {dsfile : {tenfile : file.filename,path :`/uploads/${file.filename}`}}})
     res.redirect(`/gv/file/${idclass}`)
 }
-
+//end
+// thông báo
 module.exports.notification = async (req,res)=>{
     const idclass = req.params.idclass;
     const notification = await ClassPr.findOne({
@@ -221,3 +234,4 @@ module.exports.deletedNoti = async (req,res)=>{
     await ClassPr.updateOne({_id : idclass},{$pull : {tbao : {_id : idtbao}}})
     res.redirect(`/gv/notification/${idclass}`);    
 }
+//end

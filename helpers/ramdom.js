@@ -1,3 +1,4 @@
+// ramdom string token
 module.exports.ramdomToken = (x)=>{
     const charToken = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm123456789"
     let token ="";
@@ -5,7 +6,8 @@ module.exports.ramdomToken = (x)=>{
         token += charToken.charAt(Math.floor(Math.random() * charToken.length))
     }
     return token
-}
+}//end
+// ramdom otp
 module.exports.ramdomNumber = (x)=>{
     const charNb ="0123456789"
     let number = ""
@@ -14,3 +16,4 @@ module.exports.ramdomNumber = (x)=>{
     }
     return number
 }
+// end
