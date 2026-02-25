@@ -8,7 +8,7 @@ const flash = require('express-flash') // gửi kèm thông báo
 dotenv.config();// env
 const database = require("./config/connect")
 database.connect(); // kết nối database
-const port = process.env.PORT 
+const port = process.env.PORT || 3000;
 const routerGv = require("./router/gv/index") // router Gvien
 const routerSv = require("./router/sv/index") // router svien
 app.set('views',`${__dirname}/views`)
@@ -22,9 +22,6 @@ app.use(flash());
 routerGv(app)
 routerSv(app)
 // end
-// static
-app.use(express.static("public"));
-//end
 app.listen(port , ()=>{
     console.log(`Example app listening on port ${port}`)
 })
