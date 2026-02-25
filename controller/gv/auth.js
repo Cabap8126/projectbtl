@@ -25,17 +25,17 @@ module.exports.loginPost = async (req,res)=>{
     })
     if(!gvien){
         req.flash("error","email không chính xác vui lòng nhập lại");
-        res.redirect(`/auth/login`)
+        res.redirect(`/auth/gv/login`)
         return
     }
     if(password != gvien.password){
         req.flash("error","sai mật khẩu");
-        res.redirect(`/auth/login`)
+        res.redirect(`/auth/gv/login`)
         return
     }
     if(gvien.status== "inactive"){
         req.flash("error","Tài Khoản bị Khóa")
-        res.redirect(`/auth/login`)
+        res.redirect(`/auth/gv/login`)
         return
     }
     res.cookie("token",gvien.token)
