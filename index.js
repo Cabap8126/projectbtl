@@ -22,6 +22,7 @@ app.use(flash());
 routerGv(app)
 routerSv(app)
 // end
-app.listen(port , ()=>{
-    console.log(`Example app listening on port ${port}`)
-})
+// app.listen(port , ()=>{
+//     console.log(`Example app listening on port ${port}`)
+// })
+module.exports = app;
