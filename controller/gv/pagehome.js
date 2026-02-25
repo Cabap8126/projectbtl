@@ -38,7 +38,10 @@ module.exports.dssv = async (req,res)=>{
         const tenSV = await Svmodel.findOne({
             _id : idSv
         })
-        sv.tensv = tenSV.tensv
+        if(!tenSV){
+            continue;
+        }
+        sv.tensv = tenSV.tensv            
     }
     res.render("Gv/Page/listclass/dssv",{
         pagetitle : "Danh sách lớp học",

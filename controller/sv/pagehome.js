@@ -2,12 +2,12 @@ const ClassPr = require("../../model/class.model")
 const Gvmodel = require("../../model/gv.model")
 // lấy thông tin và trả data cho giao diện
 module.exports.index = async (req,res)=>{
-    res.render("sv/Page/PgH/pagehome",{
+    res.render("sv/Page/Pgh/pagehome",{
         pagetitle : "Trang của sinh viên"
     })
 }
 module.exports.detail = async (req,res)=>{
-    res.render("sv/Page/PgH/detail",{
+    res.render("sv/Page/Pgh/detail",{
         pagetitle : "Thông tin sinh viên"
     })  
 }
