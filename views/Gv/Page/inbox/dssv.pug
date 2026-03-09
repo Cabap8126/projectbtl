@@ -1,0 +1,21 @@
+extends ../../Layout/layout.pug
+block main 
+    h1 Danh sách sinh viên 
+    table(class="table table-hover table-sm table-bordered table-dark")
+                thead  
+                    tr  
+                        th STT
+                        th Mã Sinh Viên
+                        th Tên Sinh Viên 
+                tbody 
+                    each item,index in dssv.dssv
+                        tr
+                            td #{index + 1}
+                            td #{item.masv}
+                            td #{item.tensv}
+                            if(item.room_id)
+                                td 
+                                    a(href=`/inbox/${item.room_id}` class="btn btn-warning btn-sm") Inbox
+                            else 
+                                td 
+                                    a(href="/inbox" class="btn btn-warning btn-sm") Inbox 

@@ -1,0 +1,24 @@
+html
+  head
+    link(rel="stylesheet", href="indexrt.css")
+  body
+    .page-login.page.active
+      .login-bg
+        .grid-overlay
+      .login-container
+        .login-logo
+          .logo-icon 🎓
+          h1 EduPortal
+          p HỆ THỐNG QUẢN LÝ HỌC TẬP
+        .login-card
+          .form-group
+            label Vai trò
+            .input-wrap
+              span.input-icon 👤
+              select#login-role
+                option(value) -- Chọn vai trò --
+                option(value='teacher' selected) Giảng viên
+                option(value='student') Sinh viên
+          button.btn-login Đăng nhập
+    script(src="indexrt.js") 
+

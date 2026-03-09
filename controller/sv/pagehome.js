@@ -12,7 +12,7 @@ module.exports.detail = async (req,res)=>{
     })  
 }
 module.exports.classlist = async (req,res)=>{
-    const svien = res.locals.svien
+    const svien = res.locals.user
     const classlist = await ClassPr.find({
         "dssv.masv" : svien._id
     })
@@ -23,7 +23,7 @@ module.exports.classlist = async (req,res)=>{
 }
 module.exports.diem = async ( req,res)=>{
     const idclass = req.params.idclass;
-    const svien = res.locals.svien
+    const svien = res.locals.user
     const classlist = await ClassPr.findOne({
         _id : idclass,
         "dssv.masv" : svien._id

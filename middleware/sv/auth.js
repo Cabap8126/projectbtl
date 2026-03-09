@@ -1,22 +1,22 @@
 const Svmodel = require("../../model/sv.model");
 
 module.exports.requireAuth = async (req , res , next)=>{
-    if(!req.cookies.token){
+    if(!req.cookies.tokenSv){
         res.redirect("/auth/sv/login")
         return;
     }
     else{
-        const token = req.cookies.token;
-        const svien = await Svmodel.findOne({
-            token: token,
+        const tokenSv = req.cookies.tokenSv;
+        const user = await Svmodel.findOne({
+            tokenSv: tokenSv,
             status: "active"
         }).select("-password")
-        if(!svien){
+        if(!user){
             res.redirect("/auth/sv/login")
             return;
         }
         else{
-            res.locals.svien = svien
+            res.locals.user = user
             next();
         }
     }

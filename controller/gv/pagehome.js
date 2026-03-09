@@ -17,7 +17,7 @@ module.exports.detail = async (req,res)=>{
 }//end
 // hiện dsach class
 module.exports.listclass = async (req,res)=>{
-    const id = res.locals.gvien._id
+    const id = res.locals.user._id
     const dsclass = await ClassPr.find({
         magv : id
     })
@@ -98,9 +98,9 @@ module.exports.editPost = async (req,res)=>{
 // end
 // hiển thị môn giảng
 module.exports.mongiang = async (req,res)=>{
-    const token = req.cookies.token;
+    const tokenGv = req.cookies.tokenGv;
     const monday = await Gvmodel.findOne({
-        token : token
+        tokenGv : tokenGv
     })
     res.render("Gv/Page/mongiang/index",{
         monday : monday

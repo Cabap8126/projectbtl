@@ -12,7 +12,7 @@ const modelgv = new mongoose.Schema({
     lichgiang : String,
     email : String,
     password : String,
-    token : {
+    tokenGv : {
         type : String,
         default : ramdomToken.ramdomToken(20)
     },

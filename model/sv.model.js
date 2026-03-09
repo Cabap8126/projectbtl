@@ -6,7 +6,7 @@ const modelSv = new mongoose.Schema({
     sdt : String,
     email : String,
     password : String,
-    token : {
+    tokenSv : {
         type : String,
         default : ramdomToken.ramdomToken(20)
     },

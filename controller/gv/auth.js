@@ -4,7 +4,7 @@ const ramdom = require("../../helpers/ramdom")
 const sendmail = require("../../helpers/sendmail")
 // kiểm tra đăng nhập
 module.exports.login = async (req,res)=>{
-    if(req.cookies.token){
+    if(req.cookies.tokenSv){
         res.redirect("/gv/pagehome")
     }
     else{
@@ -38,13 +38,13 @@ module.exports.loginPost = async (req,res)=>{
         res.redirect(`/auth/gv/login`)
         return
     }
-    res.cookie("token",gvien.token)
+    res.cookie("tokenGv",gvien.tokenGv)
     res.redirect("/gv/pagehome")
 }
 //end
 // đăng xuất xóa cookies
 module.exports.logout = async (req,res)=>{
-    res.clearCookie("token")
+    res.clearCookie("tokenGv")
     res.redirect("/auth/gv/login")
 }//end
 // lấy lại mạt khẩu
@@ -100,7 +100,7 @@ module.exports.otpPost = async(req,res)=>{
         email : email,
         status :"active"
     })
-    res.cookie("token",gvien.token);
+    res.cookie("tokenGv",gvien.tokenGv);
     res.redirect("/auth/gv/reset");
 }
 module.exports.reset= async (req,res)=>{
@@ -116,9 +116,9 @@ module.exports.resetPost = async (req,res)=>{
         res.redirect("/auth/gv/reset")
         return
     }
-    const token = req.cookies.oken;
+    const tokenGv = req.cookies.tokenGv;
     await Gvmodel.updateOne(
-        {token : token},{
+        {tokenGv : tokenGv},{
             password : password
         }
     )

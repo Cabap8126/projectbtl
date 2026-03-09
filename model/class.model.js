@@ -6,6 +6,7 @@ const classPr = new mongoose.Schema({
     mamh : String,
     dssv :[
         {
+            room_id : String,
             masv : String,
             cc1 : Number,
             cc2 : Number,

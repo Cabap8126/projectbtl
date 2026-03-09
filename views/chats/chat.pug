@@ -1,0 +1,26 @@
+extends ./layout.pug
+block main 
+    .container.my-3 
+        .row 
+            .col-12 
+                .chat(my-id = user._id)
+                    .inner-body 
+                        each chat in chats 
+                            div(class= (chat.user_id  == user._id ? "inner-outgoing" : "inner-incoming")) 
+                                if(chat.user_id != user._id)  
+                                    if(user.tenGv)
+                                        .inner-name #{user.tenGv}
+                                    else    
+                                        .inner-name #{user.tensv}
+                                if(chat.content)
+                                    .inner-content
+                                        | #{chat.content}
+                        div(class="inner-list-typing")                  
+                    .inner-foot 
+                        form(action="" class="inner-form")
+                            input(type="text" placeholder="Nhập nội dung..." name="content")
+                            label(for="file-upload-with-preview-upload-images"
+                                class="btn btn-light mx-2")
+                            button  
+                                i.fa-solid.fa-paper-plane
+    script(type="module" src="/chats/chat.js")

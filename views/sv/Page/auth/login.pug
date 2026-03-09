@@ -3,17 +3,25 @@ include ../../mixins/alert.pug
 block main
     +alert-success(5000)
     +alert-error(5000)
-    .container.my-5
-        .row.justify-content-center
-            .col-8 
-                h1(class="text-center") Đăng Nhập
-                form(action=`/auth/sv/login` method="POST")
-                    div(class="form-group")
-                        label(for="email") Email
-                        input(type="email" class="form-control" id="email" name="email" required)
-                    div(class="form-group")
-                        label(for="password") Mật Khẩu
-                        input(type="password" class="form-control" id="password" name="password" required) 
-                    div(class="form-group")
-                        button(type="submit" class="btn btn-primary btn-block") Đăng Nhập
-                a(href="/auth/forgot" class="text-right") Quên Mật Khẩu
+    .page-login.page.active
+      .login-bg
+        .grid-overlay
+      .login-container
+        .login-logo
+          .logo-icon 🎓
+          h1 EduPortal
+          p HỆ THỐNG QUẢN LÝ SINH VIÊN
+        .container.my-5
+            .row.justify-content-center
+                .col-8 
+                    h1(class="text-center") Đăng Nhập
+                    form(action=`/auth/sv/login` method="POST")
+                        div(class="form-group")
+                            label(for="email") Email
+                            input(type="email" class="form-control" id="email" name="email" required)
+                        div(class="form-group")
+                            label(for="password") Mật Khẩu
+                            input(type="password" class="form-control" id="password" name="password" required) 
+                        div(class="form-group")
+                            button(type="submit" class="btn btn-primary btn-block") Đăng Nhập
+                    a(href="/auth/forgot" class="text-right") Quên Mật Khẩu

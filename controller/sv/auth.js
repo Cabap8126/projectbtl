@@ -4,7 +4,7 @@ const ramdom = require("../../helpers/ramdom")
 const sendmail = require("../../helpers/sendmail")
 // kiểm tra đăng nhập
 module.exports.login = async (req,res)=>{
-    if(req.cookies.token){
+    if(req.cookies.tokenSv){
         res.redirect("/sv/pagehome")
     }
     else{
@@ -36,13 +36,13 @@ module.exports.loginPost = async (req,res)=>{
         res.redirect(`/auth/sv/login`)
         return
     }
-    res.cookie("token",svien.token)
+    res.cookie("tokenSv",svien.tokenSv)
     res.redirect("/sv/pagehome")
 }
 //end
 // đăng xuatas
 module.exports.logout = async (req,res)=>{
-    res.clearCookie("token")
+    res.clearCookie("tokenSv")
     res.redirect("/auth/sv/login")
 }
 // end
@@ -99,7 +99,7 @@ module.exports.otpPost = async(req,res)=>{
         email : email,
         status :"active"
     })
-    res.cookie("token",svien.token);
+    res.cookie("tokenSv",svien.tokenSv);
     res.redirect("/auth/sv/reset");
 }
 module.exports.reset= async (req,res)=>{
@@ -115,9 +115,9 @@ module.exports.resetPost = async (req,res)=>{
         res.redirect("/auth/sv/reset")
         return
     }
-    const token = req.cookies.oken;
+    const tokenSv = req.cookies.tokenSv;
     await Svmodel.updateOne(
-        {token : token},{
+        {tokenSv : tokenSv},{
             password : password
         }
     )

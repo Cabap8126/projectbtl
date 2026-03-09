@@ -1,20 +1,20 @@
 const Gvmodel = require("../../model/gv.model");
 // kiểm tra thông tin cookies đăng nhập
 module.exports.requireAuth = async (req , res , next)=>{
-    if(!req.cookies.token){
+    if(!req.cookies.tokenGv){
         res.redirect("/auth/gv/login")
     }
     else{
-        const token = req.cookies.token;
-        const gvien = await Gvmodel.findOne({
-            token: token,
+        const tokenGv = req.cookies.tokenGv;
+        const user = await Gvmodel.findOne({
+            tokenGv: tokenGv,
             status: "active"
         }).select("-password")
-        if(!gvien){
+        if(!user){
             res.redirect("/auth/gv/login")
         }
         else{
-            res.locals.gvien = gvien
+            res.locals.user = user
             next();
         }
     }
