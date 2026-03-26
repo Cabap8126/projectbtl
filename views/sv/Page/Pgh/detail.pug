@@ -1,7 +1,7 @@
 extends ../../Layout/layout.pug
 block main 
-    h4 Tên : #{svien.tensv}
-    h5 email : #{svien.email}
+    h4 Tên : #{user.tensv}
+    h5 email : #{user.email}
     h5 môn hoc : 
-    each item in svien.dsmon 
+    each item in user.dsmon 
         p  - #{item.tenmh} 

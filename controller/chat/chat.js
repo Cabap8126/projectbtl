@@ -1,6 +1,3 @@
-const ClassPr = require("../../model/class.model")
-const Svmodel = require("../../model/sv.model")
-const Gvmodel = require("../../model/gv.model")
 const Chats = require("../../model/chat")
 const chatsocket = require("../../socket/inbox")
 module.exports.inboxsv = async (req, res) => {

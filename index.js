@@ -24,16 +24,19 @@ app.use(session({ cookie: { maxAge: 60000 }}));
 app.use(flash());
 //router
 indexrt(app);
-routerGv(app)
+routerGv(app);
 routerSv(app)
 chats(app)
 // end
 //socket
+
 const server = http.createServer(app);
 const io = new Server(server);
-global._io = io
+global._io = io;
 //end
 server.listen(port , ()=>{
     console.log(`Example app listening on port ${port}`)
-})
+});
+// end
+
 // module.exports = app;

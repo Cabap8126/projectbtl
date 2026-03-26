@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EduPortal – Đăng Nhập</title>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-dark: #0d0f14;
+    --bg-panel: #141720;
+    --bg-card: #1a1e2e;
+    --bg-sidebar: #111318;
+    --accent-blue: #3b82f6;
+    --accent-blue-light: #60a5fa;
+    --accent-red: #ef4444;
+    --accent-green: #22c55e;
+    --accent-yellow: #f59e0b;
+    --text-primary: #e8ecf4;
+    --text-secondary: #8892a4;
+    --text-muted: #4a5568;
+    --border: rgba(255,255,255,0.07);
+    --border-active: rgba(59,130,246,0.4);
+    --glow: 0 0 30px rgba(59,130,246,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    background: var(--bg-dark);
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ─── PAGES ─── */
+  .page { display: none; min-height: 100vh; }
+  .page.active { display: flex; }
+
+  /* ══════════════════════════════════════
+     LOGIN PAGE
+  ══════════════════════════════════════ */
+  #page-login {
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-dark);
+    position: relative;
+  }
+
+  .login-bg {
+    position: absolute; inset: 0; overflow: hidden; pointer-events: none;
+  }
+  .login-bg::before {
+    content: '';
+    position: absolute;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(59,130,246,0.12) 0%, transparent 70%);
+    top: -100px; left: -150px;
+    animation: pulse-glow 6s ease-in-out infinite;
+  }
+  .login-bg::after {
+    content: '';
+    position: absolute;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(99,102,241,0.1) 0%, transparent 70%);
+    bottom: -50px; right: -100px;
+    animation: pulse-glow 8s ease-in-out infinite reverse;
+  }
+  .login-bg .grid-overlay {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.1); opacity: 1; }
+  }
+
+  .login-container {
+    position: relative; z-index: 1;
+    width: 420px;
+    animation: slide-up 0.6s cubic-bezier(0.16,1,0.3,1) both;
+  }
+
+  @keyframes slide-up {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .login-logo {
+    text-align: center;
+    margin-bottom: 36px;
+  }
+  .login-logo .logo-icon {
+    width: 56px; height: 56px;
+    background: linear-gradient(135deg, #3b82f6, #6366f1);
+    border-radius: 16px;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 26px;
+    margin-bottom: 14px;
+    box-shadow: 0 8px 32px rgba(59,130,246,0.35);
+  }
+  .login-logo h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 28px; font-weight: 700;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, #e8ecf4, #8892a4);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .login-logo p {
+    font-size: 13px; color: var(--text-muted);
+    margin-top: 4px; letter-spacing: 0.5px;
+  }
+
+  .login-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 36px;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.4), var(--glow);
+  }
+
+  .login-card h2 {
+    font-size: 20px; font-weight: 600; margin-bottom: 28px;
+    color: var(--text-primary);
+  }
+
+  .form-group {
+    margin-bottom: 18px;
+  }
+  .form-group label {
+    display: block;
+    font-size: 12.5px; font-weight: 500;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+  }
+
+  .input-wrap {
+    position: relative;
+  }
+  .input-wrap .input-icon {
+    position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+    color: var(--text-muted); font-size: 16px; pointer-events: none;
+  }
+  .input-wrap input,
+  .input-wrap select {
+    width: 100%;
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 14px 12px 42px;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 14px; color: var(--text-primary);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    -webkit-appearance: none;
+  }
+  .input-wrap input::placeholder { color: var(--text-muted); }
+  .input-wrap input:focus,
+  .input-wrap select:focus {
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 0 3px rgba(59,130,246,0.12);
+  }
+  .input-wrap select option {
+    background: var(--bg-panel); color: var(--text-primary);
+  }
+
+  .btn-login {
+    width: 100%; padding: 13px;
+    background: linear-gradient(135deg, #3b82f6, #6366f1);
+    border: none; border-radius: 10px;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 15px; font-weight: 600;
+    color: white; cursor: pointer;
+    margin-top: 8px;
+    transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
+    box-shadow: 0 4px 20px rgba(59,130,246,0.3);
+    letter-spacing: 0.3px;
+  }
+  .btn-login:hover {
+    opacity: 0.92; transform: translateY(-1px);
+    box-shadow: 0 8px 28px rgba(59,130,246,0.45);
+  }
+  .btn-login:active { transform: translateY(0); }
+
+  .forgot-link {
+    display: block; text-align: center;
+    margin-top: 18px;
+    font-size: 13px; color: var(--accent-blue-light);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .forgot-link:hover { color: white; text-decoration: underline; }
+
+  /* ══════════════════════════════════════
+     SHARED LAYOUT (TEACHER + STUDENT)
+  ══════════════════════════════════════ */
+  #page-teacher, #page-student {
+    flex-direction: row;
+  }
+
+  /* ─── SIDEBAR ─── */
+  .sidebar {
+    width: 200px; flex-shrink: 0;
+    background: var(--bg-sidebar);
+    border-right: 1px solid var(--border);
+    display: flex; flex-direction: column;
+    min-height: 100vh;
+    padding-top: 0;
+  }
+  .sidebar-brand {
+    padding: 22px 20px 18px;
+    border-bottom: 1px solid var(--border);
+  }
+  .sidebar-brand span {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 17px; font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.3px;
+  }
+  .sidebar-brand small {
+    display: block; font-size: 11px;
+    color: var(--text-muted); margin-top: 2px;
+  }
+
+  .sidebar-nav { padding: 10px 0; flex: 1; }
+  .nav-item {
+    display: block; padding: 10px 20px;
+    font-size: 13.5px; color: var(--text-secondary);
+    cursor: pointer;
+    transition: color 0.15s, background 0.15s;
+    border-left: 3px solid transparent;
+    position: relative;
+    text-decoration: none;
+  }
+  .nav-item:hover { color: var(--text-primary); background: rgba(255,255,255,0.03); }
+  .nav-item.active {
+    color: var(--accent-blue-light);
+    border-left-color: var(--accent-blue);
+    background: rgba(59,130,246,0.06);
+  }
+
+  /* ─── TOPBAR ─── */
+  .main-area { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+  .topbar {
+    height: 56px;
+    background: var(--bg-panel);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: flex-end;
+    padding: 0 24px; gap: 10px;
+    flex-shrink: 0;
+  }
+  .avatar-badge {
+    width: 32px; height: 32px;
+    background: linear-gradient(135deg, #3b82f6, #6366f1);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; color: white;
+  }
+  .btn-logout {
+    padding: 7px 16px;
+    background: var(--accent-red);
+    border: none; border-radius: 8px;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 13px; font-weight: 600; color: white;
+    cursor: pointer;
+    transition: opacity 0.15s, transform 0.1s;
+  }
+  .btn-logout:hover { opacity: 0.85; transform: translateY(-1px); }
+
+  /* ─── CONTENT ─── */
+  .content { flex: 1; padding: 32px 36px; overflow-y: auto; }
+  .page-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 32px; font-weight: 700;
+    color: var(--text-primary); margin-bottom: 32px;
+    letter-spacing: -0.5px;
+  }
+
+  /* ─── CLASS GRID ─── */
+  .class-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 20px;
+  }
+  .class-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 22px 24px;
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+    animation: fade-in 0.5s ease both;
+  }
+  .class-card:hover {
+    border-color: var(--border-active);
+    box-shadow: var(--glow);
+    transform: translateY(-2px);
+  }
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .class-card:nth-child(2) { animation-delay: 0.1s; }
+  .class-card:nth-child(3) { animation-delay: 0.2s; }
+  .class-card:nth-child(4) { animation-delay: 0.3s; }
+
+  .class-label {
+    font-size: 12px; color: var(--text-muted);
+    text-transform: uppercase; letter-spacing: 0.8px;
+    margin-bottom: 6px;
+  }
+  .class-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 18px; font-weight: 600;
+    color: var(--text-primary); margin-bottom: 4px;
+  }
+  .class-code {
+    font-size: 12.5px; color: var(--accent-blue-light);
+    margin-bottom: 18px;
+  }
+
+  .class-actions {
+    display: flex; gap: 10px; align-items: center;
+  }
+  .action-link {
+    font-size: 13px; color: var(--accent-blue-light);
+    text-decoration: none; cursor: pointer;
+    transition: color 0.15s;
+    flex: 1;
+  }
+  .action-link:hover { color: white; }
+
+  .icon-btn {
+    width: 34px; height: 34px;
+    background: rgba(59,130,246,0.1);
+    border: 1px solid rgba(59,130,246,0.2);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; color: var(--accent-blue-light);
+    font-size: 15px;
+    transition: background 0.15s, border-color 0.15s, transform 0.1s;
+    text-decoration: none;
+  }
+  .icon-btn:hover {
+    background: rgba(59,130,246,0.22);
+    border-color: var(--accent-blue);
+    transform: scale(1.08);
+  }
+
+  /* ─── SUBJECT GRID (Môn Giảng) ─── */
+  .subject-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 18px;
+  }
+  .subject-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 22px;
+    animation: fade-in 0.5s ease both;
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+  }
+  .subject-card:hover {
+    border-color: var(--border-active);
+    box-shadow: var(--glow);
+    transform: translateY(-2px);
+  }
+  .subject-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; margin-bottom: 14px;
+  }
+  .subject-icon.blue { background: rgba(59,130,246,0.15); }
+  .subject-icon.green { background: rgba(34,197,94,0.15); }
+  .subject-icon.yellow { background: rgba(245,158,11,0.15); }
+  .subject-name { font-weight: 600; font-size: 15px; margin-bottom: 4px; }
+  .subject-meta { font-size: 12px; color: var(--text-muted); }
+
+  /* ─── INBOX ─── */
+  .inbox-list { display: flex; flex-direction: column; gap: 12px; }
+  .inbox-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px 20px;
+    display: flex; align-items: flex-start; gap: 14px;
+    animation: fade-in 0.5s ease both;
+    transition: border-color 0.15s;
+    cursor: pointer;
+  }
+  .inbox-item:hover { border-color: var(--border-active); }
+  .inbox-item.unread { border-left: 3px solid var(--accent-blue); }
+  .inbox-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--accent-blue); flex-shrink: 0; margin-top: 5px;
+  }
+  .inbox-dot.read { background: var(--text-muted); }
+  .inbox-info { flex: 1; }
+  .inbox-from { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+  .inbox-subject { font-size: 13px; color: var(--text-secondary); margin-top: 2px; }
+  .inbox-time { font-size: 11px; color: var(--text-muted); flex-shrink: 0; margin-top: 2px; }
+
+  /* ─── STUDENT: Schedule ─── */
+  .schedule-table { width: 100%; border-collapse: collapse; }
+  .schedule-table th, .schedule-table td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    font-size: 13.5px;
+  }
+  .schedule-table th {
+    font-size: 11px; text-transform: uppercase;
+    letter-spacing: 0.8px; color: var(--text-muted);
+    background: var(--bg-panel);
+  }
+  .schedule-table tr:hover td { background: rgba(255,255,255,0.02); }
+  .badge {
+    display: inline-block; padding: 3px 10px;
+    border-radius: 6px; font-size: 11.5px; font-weight: 600;
+  }
+  .badge-blue { background: rgba(59,130,246,0.15); color: var(--accent-blue-light); }
+  .badge-green { background: rgba(34,197,94,0.15); color: #4ade80; }
+  .badge-yellow { background: rgba(245,158,11,0.15); color: #fbbf24; }
+
+  /* ─── FLOATING ACTION ─── */
+  .fab-area {
+    position: fixed; bottom: 24px; right: 24px;
+    display: flex; align-items: center; gap: 10px;
+    z-index: 100;
+  }
+  .fab-toggle {
+    width: 44px; height: 44px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; font-size: 18px;
+    color: var(--text-secondary);
+    transition: all 0.15s;
+  }
+  .fab-toggle:hover { background: var(--bg-panel); color: var(--text-primary); }
+  .fab-main {
+    width: 44px; height: 44px;
+    background: linear-gradient(135deg, #3b82f6, #6366f1);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; font-size: 20px; color: white;
+    box-shadow: 0 4px 20px rgba(59,130,246,0.4);
+    transition: all 0.15s;
+  }
+  .fab-main:hover { transform: scale(1.05); box-shadow: 0 6px 28px rgba(59,130,246,0.55); }
+
+  /* ─── Forgot Password Modal ─── */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
+    z-index: 200; align-items: center; justify-content: center;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 32px; width: 380px;
+    animation: slide-up 0.3s ease both;
+  }
+  .modal h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+  .modal p { font-size: 13px; color: var(--text-secondary); margin-bottom: 20px; }
+  .modal-actions { display: flex; gap: 10px; margin-top: 16px; }
+  .btn-secondary {
+    flex: 1; padding: 11px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 9px; color: var(--text-secondary);
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 14px; cursor: pointer;
+    transition: all 0.15s;
+  }
+  .btn-secondary:hover { border-color: var(--text-muted); color: var(--text-primary); }
+  .btn-primary {
+    flex: 1; padding: 11px;
+    background: var(--accent-blue);
+    border: none; border-radius: 9px;
+    color: white; font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 14px; font-weight: 600; cursor: pointer;
+    transition: opacity 0.15s;
+  }
+  .btn-primary:hover { opacity: 0.85; }
+
+  /* scrollbar */
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     PAGE: LOGIN
+══════════════════════════════════════ -->
+<div id="page-login" class="page active">
+  <div class="login-bg"><div class="grid-overlay"></div></div>
+
+  <div class="login-container">
+    <div class="login-logo">
+      <div class="logo-icon">🎓</div>
+      <h1>EduPortal</h1>
+      <p>HỆ THỐNG QUẢN LÝ HỌC TẬP</p>
+    </div>
+
+    <div class="login-card">
+      <h2>Đăng nhập tài khoản</h2>
+
+      <div class="form-group">
+        <label>Email</label>
+        <div class="input-wrap">
+          <span class="input-icon">✉</span>
+          <input type="email" id="login-email" placeholder="example@edu.vn">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Mật khẩu</label>
+        <div class="input-wrap">
+          <span class="input-icon">🔒</span>
+          <input type="password" id="login-password" placeholder="Nhập mật khẩu">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Vai trò</label>
+        <div class="input-wrap">
+          <span class="input-icon">👤</span>
+          <select id="login-role">
+            <option value="">-- Chọn vai trò --</option>
+            <option value="teacher">Giảng viên</option>
+            <option value="student">Sinh viên</option>
+          </select>
+        </div>
+      </div>
+
+      <button class="btn-login" onclick="doLogin()">Đăng nhập</button>
+      <a href="#" class="forgot-link" onclick="openForgot(event)">Quên mật khẩu?</a>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     PAGE: TEACHER
+══════════════════════════════════════ -->
+<div id="page-teacher" class="page">
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <span>EduPortal</span>
+      <small>Giảng viên</small>
+    </div>
+    <nav class="sidebar-nav">
+      <a class="nav-item active" onclick="showSection('teacher','classes',this)">📋&nbsp; Danh sách lớp</a>
+      <a class="nav-item" onclick="showSection('teacher','subjects',this)">📚&nbsp; Môn Giảng</a>
+      <a class="nav-item" onclick="showSection('teacher','inbox',this)">📨&nbsp; Inbox</a>
+    </nav>
+  </aside>
+
+  <div class="main-area">
+    <div class="topbar">
+      <div class="avatar-badge">gv</div>
+      <button class="btn-logout" onclick="logout()">Đăng Xuất</button>
+    </div>
+
+    <div class="content">
+      <!-- SECTION: Danh sách lớp học -->
+      <div id="teacher-classes">
+        <div class="page-title">Danh sách lớp học</div>
+        <div class="class-grid">
+          <div class="class-card">
+            <div class="class-label">Lớp</div>
+            <div class="class-name">REACT-01</div>
+            <div class="class-code">MH03 · 28 sinh viên</div>
+            <div class="class-actions">
+              <a class="action-link">Danh sách sinh viên lớp</a>
+              <a class="icon-btn" title="Tài liệu">📄</a>
+              <a class="icon-btn" title="Thông báo">🔔</a>
+            </div>
+          </div>
+          <div class="class-card">
+            <div class="class-label">Lớp</div>
+            <div class="class-name">WEB-01</div>
+            <div class="class-code">MH01 · 32 sinh viên</div>
+            <div class="class-actions">
+              <a class="action-link">Danh sách sinh viên lớp</a>
+              <a class="icon-btn" title="Tài liệu">📄</a>
+              <a class="icon-btn" title="Thông báo">🔔</a>
+            </div>
+          </div>
+          <div class="class-card">
+            <div class="class-label">Lớp</div>
+            <div class="class-name">NODE-02</div>
+            <div class="class-code">MH05 · 24 sinh viên</div>
+            <div class="class-actions">
+              <a class="action-link">Danh sách sinh viên lớp</a>
+              <a class="icon-btn" title="Tài liệu">📄</a>
+              <a class="icon-btn" title="Thông báo">🔔</a>
+            </div>
+          </div>
+          <div class="class-card">
+            <div class="class-label">Lớp</div>
+            <div class="class-name">UI-03</div>
+            <div class="class-code">MH07 · 19 sinh viên</div>
+            <div class="class-actions">
+              <a class="action-link">Danh sách sinh viên lớp</a>
+              <a class="icon-btn" title="Tài liệu">📄</a>
+              <a class="icon-btn" title="Thông báo">🔔</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION: Môn giảng -->
+      <div id="teacher-subjects" style="display:none">
+        <div class="page-title">Môn Giảng</div>
+        <div class="subject-grid">
+          <div class="subject-card">
+            <div class="subject-icon blue">⚛️</div>
+            <div class="subject-name">ReactJS</div>
+            <div class="subject-meta">Mã môn: MH03 &nbsp;·&nbsp; 45 tiết</div>
+          </div>
+          <div class="subject-card">
+            <div class="subject-icon green">🌐</div>
+            <div class="subject-name">Web Căn Bản</div>
+            <div class="subject-meta">Mã môn: MH01 &nbsp;·&nbsp; 30 tiết</div>
+          </div>
+          <div class="subject-card">
+            <div class="subject-icon yellow">🟢</div>
+            <div class="subject-name">NodeJS</div>
+            <div class="subject-meta">Mã môn: MH05 &nbsp;·&nbsp; 45 tiết</div>
+          </div>
+          <div class="subject-card">
+            <div class="subject-icon blue">🎨</div>
+            <div class="subject-name">UI/UX Design</div>
+            <div class="subject-meta">Mã môn: MH07 &nbsp;·&nbsp; 30 tiết</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION: Inbox -->
+      <div id="teacher-inbox" style="display:none">
+        <div class="page-title">Inbox</div>
+        <div class="inbox-list">
+          <div class="inbox-item unread">
+            <div class="inbox-dot"></div>
+            <div class="inbox-info">
+              <div class="inbox-from">Nguyễn Văn An – REACT-01</div>
+              <div class="inbox-subject">Hỏi về bài tập tuần 5 – useState hooks</div>
+            </div>
+            <div class="inbox-time">10 phút trước</div>
+          </div>
+          <div class="inbox-item unread">
+            <div class="inbox-dot"></div>
+            <div class="inbox-info">
+              <div class="inbox-from">Trần Thị Bình – WEB-01</div>
+              <div class="inbox-subject">Xin phép nghỉ học buổi sáng thứ 4</div>
+            </div>
+            <div class="inbox-time">1 giờ trước</div>
+          </div>
+          <div class="inbox-item">
+            <div class="inbox-dot read"></div>
+            <div class="inbox-info">
+              <div class="inbox-from">Phòng Đào Tạo</div>
+              <div class="inbox-subject">Lịch thi giữa kỳ học kỳ 2/2025</div>
+            </div>
+            <div class="inbox-time">Hôm qua</div>
+          </div>
+          <div class="inbox-item">
+            <div class="inbox-dot read"></div>
+            <div class="inbox-info">
+              <div class="inbox-from">Lê Minh Khoa – NODE-02</div>
+              <div class="inbox-subject">Nộp bài tập lớn – đính kèm file</div>
+            </div>
+            <div class="inbox-time">2 ngày trước</div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /content -->
+  </div>
+
+  <div class="fab-area">
+    <div class="fab-toggle">▲</div>
+    <div class="fab-main">👥</div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     PAGE: STUDENT
+══════════════════════════════════════ -->
+<div id="page-student" class="page">
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <span>EduPortal</span>
+      <small>Sinh viên</small>
+    </div>
+    <nav class="sidebar-nav">
+      <a class="nav-item active" onclick="showSection('student','schedule',this)">📅&nbsp; Thời Khoá Biểu</a>
+      <a class="nav-item" onclick="showSection('student','courses',this)">📖&nbsp; Môn Học</a>
+      <a class="nav-item" onclick="showSection('student','inbox',this)">📨&nbsp; Inbox</a>
+    </nav>
+  </aside>
+
+  <div class="main-area">
+    <div class="topbar">
+      <div class="avatar-badge">sv</div>
+      <button class="btn-logout" onclick="logout()">Đăng Xuất</button>
+    </div>
+
+    <div class="content">
+      <!-- SECTION: Thời khoá biểu -->
+      <div id="student-schedule">
+        <div class="page-title">Thời Khoá Biểu</div>
+        <div class="class-card" style="margin-bottom:0">
+          <table class="schedule-table">
+            <thead>
+              <tr>
+                <th>Thứ</th>
+                <th>Môn học</th>
+                <th>Phòng</th>
+                <th>Ca học</th>
+                <th>Giảng viên</th>
+                <th>Trạng thái</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Thứ 2</td>
+                <td>ReactJS (MH03)</td>
+                <td>P.301</td>
+                <td>07:30 – 10:45</td>
+                <td>GV. Minh Tuấn</td>
+                <td><span class="badge badge-green">Đang học</span></td>
+              </tr>
+              <tr>
+                <td>Thứ 3</td>
+                <td>Web Căn Bản (MH01)</td>
+                <td>P.205</td>
+                <td>13:00 – 16:15</td>
+                <td>GV. Thu Hà</td>
+                <td><span class="badge badge-green">Đang học</span></td>
+              </tr>
+              <tr>
+                <td>Thứ 5</td>
+                <td>NodeJS (MH05)</td>
+                <td>P.401</td>
+                <td>07:30 – 10:45</td>
+                <td>GV. Quốc Huy</td>
+                <td><span class="badge badge-yellow">Sắp diễn ra</span></td>
+              </tr>
+              <tr>
+                <td>Thứ 6</td>
+                <td>UI/UX Design (MH07)</td>
+                <td>Lab A</td>
+                <td>13:00 – 16:15</td>
+                <td>GV. Lan Anh</td>
+                <td><span class="badge badge-blue">Chờ xác nhận</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- SECTION: Môn học -->
+      <div id="student-courses" style="display:none">
+        <div class="page-title">Môn Học</div>
+        <div class="class-grid">
+          <div class="class-card">
+            <div class="class-label">Lớp đang học</div>
+            <div class="class-name">REACT-01</div>
+            <div class="class-code">MH03 &nbsp;·&nbsp; GV. Minh Tuấn</div>
+            <div class="class-actions">
+              <a class="action-link">Xem tài liệu môn học</a>
+              <a class="icon-btn" title="Bài tập">📄</a>
+              <a class="icon-btn" title="Thông báo">🔔</a>
+            </div>
+          </div>
+          <div class="class-card">
+            <div class="class-label">Lớp đang học</div>
+            <div class="class-name">WEB-01</div>
+            <div class="class-code">MH01 &nbsp;·&nbsp; GV. Thu Hà</div>
+            <div class="class-actions">
+              <a class="action-link">Xem tài liệu môn học</a>
+              <a class="icon-btn" title="Bài tập">📄</a>
+              <a class="icon-btn" title="Thông báo">🔔</a>
+            </div>
+          </div>
+          <div class="class-card">
+            <div class="class-label">Lớp đang học</div>
+            <div class="class-name">NODE-02</div>
+            <div class="class-code">MH05 &nbsp;·&nbsp; GV. Quốc Huy</div>
+            <div class="class-actions">
+              <a class="action-link">Xem tài liệu môn học</a>
+              <a class="icon-btn" title="Bài tập">📄</a>
+              <a class="icon-btn" title="Thông báo">🔔</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION: Inbox -->
+      <div id="student-inbox" style="display:none">
+        <div class="page-title">Inbox</div>
+        <div class="inbox-list">
+          <div class="inbox-item unread">
+            <div class="inbox-dot"></div>
+            <div class="inbox-info">
+              <div class="inbox-from">GV. Minh Tuấn – ReactJS</div>
+              <div class="inbox-subject">Bài tập tuần 5: Thực hành useState & useEffect</div>
+            </div>
+            <div class="inbox-time">30 phút trước</div>
+          </div>
+          <div class="inbox-item unread">
+            <div class="inbox-dot"></div>
+            <div class="inbox-info">
+              <div class="inbox-from">Phòng Đào Tạo</div>
+              <div class="inbox-subject">Thông báo lịch thi giữa kỳ học kỳ 2</div>
+            </div>
+            <div class="inbox-time">2 giờ trước</div>
+          </div>
+          <div class="inbox-item">
+            <div class="inbox-dot read"></div>
+            <div class="inbox-info">
+              <div class="inbox-from">GV. Thu Hà – Web Căn Bản</div>
+              <div class="inbox-subject">Kết quả chấm bài tập tuần 3</div>
+            </div>
+            <div class="inbox-time">Hôm qua</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fab-area">
+    <div class="fab-toggle">▲</div>
+    <div class="fab-main">💬</div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     MODAL: Quên mật khẩu
+══════════════════════════════════════ -->
+<div class="modal-overlay" id="forgot-modal" onclick="closeForgot(event)">
+  <div class="modal">
+    <h3>🔑 Quên mật khẩu?</h3>
+    <p>Nhập email của bạn và chúng tôi sẽ gửi hướng dẫn đặt lại mật khẩu.</p>
+    <div class="input-wrap">
+      <span class="input-icon">✉</span>
+      <input type="email" placeholder="Nhập email đăng ký">
+    </div>
+    <div class="modal-actions">
+      <button class="btn-secondary" onclick="closeForgotBtn()">Huỷ</button>
+      <button class="btn-primary" onclick="closeForgotBtn()">Gửi yêu cầu</button>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  function doLogin() {
+    const role = document.getElementById('login-role').value;
+    const email = document.getElementById('login-email').value;
+    const pass = document.getElementById('login-password').value;
+
+    if (!email || !pass || !role) {
+      alert('Vui lòng điền đầy đủ thông tin!');
+      return;
+    }
+
+    document.getElementById('page-login').classList.remove('active');
+    const target = role === 'teacher' ? 'page-teacher' : 'page-student';
+    document.getElementById(target).classList.add('active');
+  }
+
+  function logout() {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-login').classList.add('active');
+  }
+
+  function showSection(role, section, el) {
+    // hide all sections
+    document.querySelectorAll(`#page-${role} .content > div`).forEach(d => d.style.display = 'none');
+    document.getElementById(`${role}-${section}`).style.display = 'block';
+
+    // update nav
+    document.querySelectorAll(`#page-${role} .nav-item`).forEach(n => n.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  function openForgot(e) {
+    e.preventDefault();
+    document.getElementById('forgot-modal').classList.add('open');
+  }
+  function closeForgot(e) {
+    if (e.target === document.getElementById('forgot-modal'))
+      document.getElementById('forgot-modal').classList.remove('open');
+  }
+  function closeForgotBtn() {
+    document.getElementById('forgot-modal').classList.remove('open');
+  }
+</script>
+</body>
+</html>
