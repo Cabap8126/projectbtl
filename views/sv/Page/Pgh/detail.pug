@@ -1,7 +1,53 @@
 extends ../../Layout/layout.pug
 block main 
-    h4 Tên : #{user.tensv}
-    h5 email : #{user.email}
-    h5 môn hoc : 
-    each item in user.dsmon 
-        p  - #{item.tenmh} 
+    .breadcrumb-nav
+      span Profile
+      span.separator &gt;
+      span.current Thông tin cá nhân
+
+    .profile-card
+      .card-header
+        h2 Thông tin cá nhân
+
+      .card-body
+        .flex-container
+          .sidebar-info
+            .avatar-wrapper
+              .avatar-placeholder
+                i.fas.fa-user
+              button.btn-camera
+                i.fas.fa-camera
+            
+            .basic-info-list
+              .info-item
+                span.label Họ và tên: #{user.tensv}
+                span.value
+              .info-item
+                span.label Ngày sinh: -/-/-
+                span.value
+              .info-item
+                span.label Email: #{user.email}
+                span.value
+              .info-item
+                span.label Mã sinh viên: #{user.masv}
+                span.value
+              .info-item
+                span.label Kế hoạch:
+                span.badge-empty -- Không tìm thấy dữ liệu
+              .info-item
+                span.label Danh sách môn học:
+                span.value
+                each item in user.dsmon 
+                    p  #{item.tenmh}
+          .main-form-content
+            table.data-table
+              thead
+                tr
+                  th ---
+                  th ---
+                  th ---
+                  th ---
+              tbody
+                tr
+                  td(colspan="4").empty-state
+                    p thông tin

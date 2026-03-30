@@ -22,6 +22,7 @@ app.use(bodyParser.urlencoded({extended : false})) // cho phép lấy data từ 
 app.use(cookieParser('abcxyz')); // cookies
 app.use(session({ cookie: { maxAge: 60000 }}));
 app.use(flash());
+app.use(express.json());
 //router
 indexrt(app);
 routerGv(app);
@@ -34,6 +35,7 @@ const server = http.createServer(app);
 const io = new Server(server);
 global._io = io;
 //end
+//sever
 server.listen(port , ()=>{
     console.log(`Example app listening on port ${port}`)
 });

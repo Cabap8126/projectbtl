@@ -1,5 +1,19 @@
 extends ../../Layout/layout.pug
-block main 
-    .row 
-        .col-3 
-            #{pagetitle}
+block main
+  .dashboard-wrapper
+    .login-bg
+      .grid-overlay
+    
+    .main-content
+      .welcome-header
+        h1 Xin chào!
+        p Chúc bạn một ngày làm việc và học tập hiệu quả.
+      .news-section
+        .news-header
+          span | Tin tức
+          a(href="#") Xem tất cả
+        .news-grid
+          .news-card.yellow-note
+            .card-content THÔNG BÁO
+          .news-card.yellow-note
+            .card-content THÔNG BÁO

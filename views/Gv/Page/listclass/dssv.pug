@@ -1,27 +1,48 @@
 extends ../../Layout/layout.pug
 block main 
     h1 Danh sách sinh viên 
-    table(class="table table-hover table-sm table-bordered table-dark")
-                thead  
-                    tr  
-                        th STT
-                        th Mã Sinh Viên
-                        th Tên Sinh Viên 
-                        th Điểm CC1
-                        th Điểm CC2
-                        th Điểm TH1
-                        th Điểm TH2 
-                        th Tổng điểm
-                tbody 
-                    each item,index in dssv.dssv
-                        tr
-                            td #{index + 1}
-                            td #{item.masv}
-                            td #{item.tensv}
-                            td #{item.cc1}
-                            td #{item.cc2}
-                            td #{item.th1}
-                            td #{item.th2}
-                            td #{((item.cc1 + item.cc2) * 0.05 + item.th1 * 0.4 + item.th2*0.5).toFixed(2)}
-                            td 
-                                a(href=`/gv/edit/${dssv._id}/${item.masv}` class="btn btn-warning btn-sm") Sửa
+
+    table.table.table-hover.table-sm.table-bordered.table-dark
+        thead  
+            tr  
+                th STT
+                th Mã Sinh Viên
+                th Tên Sinh Viên 
+                th Điểm CC1
+                th Điểm CC2
+                th Điểm TH1
+                th Điểm TH2 
+                th Tổng điểm
+                th Hành động
+
+        tbody 
+            each item,index in dssv.dssv
+                tr(data-id=dssv._id data-masv=item.masv)
+                    td #{index + 1}
+                    td #{item.masv}
+                    td #{item.tensv}
+
+                    td 
+                        span.view #{item.cc1}
+                        input.edit.form-control(type="number", value=item.cc1 style="display:none"     min="0" max="10" )
+
+                    td 
+                        span.view #{item.cc2}
+                        input.edit.form-control(type="number", value=item.cc2 style="display:none" min="0" max="10" )
+
+                    td 
+                        span.view #{item.th1}
+                        input.edit.form-control(type="number", value=item.th1 style="display:none" min="0" max="10" )
+
+                    td 
+                        span.view #{item.th2}
+                        input.edit.form-control(type="number", value=item.th2 style="display:none" min="0" max="10")
+
+                    td #{((item.cc1 + item.cc2) * 0.05 + item.th1 * 0.4 + item.th2*0.5).toFixed(2)}
+
+                    td 
+                        button.btn.btn-warning.btn-sm.btn-edit(type="button") Sửa
+                        button.btn.btn-success.btn-sm.btn-save(type="button" style="display:none") Xác nhận
+                        button.btn.btn-secondary.btn-sm.btn-cancel(type="button" style="display:none") Hủy
+    block scripts
+        script(src="/gv/index.js")

@@ -1,7 +1,39 @@
 extends ../../Layout/layout.pug
 block main 
-    h2 Môn: #{ttsv.tenmh} (mã môn : #{ttsv.mamh})
-    h3 điểm cc1 : #{ttsv.cc1}
-    h3 điểm cc2 :  #{ttsv.cc2}
-    h3 điểm th1 : #{ttsv.th1}
-    h3 điểm th2 : #{ttsv.th2}
+  .content-wrapper.py-4
+    .container-fluid
+      .card-table-wrapper
+        .card-header-custom
+          h4.m-0 Bảng điểm chi tiết: #{ttsv.tenmh}
+          span.badge-code Mã môn: #{ttsv.mamh}
+        
+        .table-responsive
+          table.table-modern
+            thead
+              tr
+                th(width="40%") Thành phần điểm
+                th(width="20%") Điểm số
+                th(width="20%") Trọng số
+            tbody
+              tr
+                td Chuyên cần 1
+                td.font-weight-bold #{ttsv.cc1 || '-'}
+                td 5%
+              tr
+                td Chuyên cần 2
+                td.font-weight-bold #{ttsv.cc2 || '-'}
+                td 5%
+              tr
+                td Thực hành 1
+                td.font-weight-bold #{ttsv.th1 || '-'}
+                td 30%
+              tr
+                td Thực hành 2
+                td.font-weight-bold #{ttsv.th2 || '-'}
+                td 60%
+            tfoot
+              tr
+                td.text-right.font-weight-bold(colspan="2") Trung bình thành phần (tạm tính):
+                td.font-weight-bold.text-primary(colspan="2") 
+                  - var avg = ((ttsv.cc1 || 0) + (ttsv.cc2 || 0) + (ttsv.th1 || 0) + (ttsv.th2 || 0)) / 4
+                  | #{avg.toFixed(2)} / 10

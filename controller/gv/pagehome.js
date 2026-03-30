@@ -76,25 +76,29 @@ module.exports.edit = async ( req,res)=>{
 }
 // end
 //nhận data từ form
-module.exports.editPost = async (req,res)=>{
-    const idsv = req.params.id;
-    const idclass = req.params.idclass;
-    const editdiem = req.body
-    const lophc = await ClassPr.findOne({
-        _id : idclass
-    })
-    await ClassPr.updateOne(
-        {_id : idclass,"dssv.masv" : idsv},{
-            $set :{
-                "dssv.$.cc1": editdiem.cc1,
-                "dssv.$.cc2": editdiem.cc2,
-                "dssv.$.th1": editdiem.th1,
-                "dssv.$.th2": editdiem.th2,
+module.exports.editPost = async (req, res) => {
+    try {
+        const idsv = req.params.id;
+        const idclass = req.params.idclass;
+        const editdiem = req.body;
+
+        await ClassPr.updateOne(
+            { _id: idclass, "dssv.masv": idsv },
+            {
+                $set: {
+                    "dssv.$.cc1": Number(editdiem.cc1),
+                    "dssv.$.cc2": Number(editdiem.cc2),
+                    "dssv.$.th1": Number(editdiem.th1),
+                    "dssv.$.th2": Number(editdiem.th2),
+                }
             }
-        }
-    )
-    res.redirect(`/gv/dssv/${lophc._id}`)
-}
+        );
+        res.json({ success: true });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ success: false });
+    }
+};
 // end
 // hiển thị môn giảng
 module.exports.mongiang = async (req,res)=>{

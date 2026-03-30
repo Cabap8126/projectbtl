@@ -8,7 +8,6 @@ router.get("/pagehome",controller.index)
 router.get("/detail",controller.detail)
 router.get("/listclass",controller.listclass);
 router.get("/dssv/:id",controller.dssv);
-router.get("/edit/:idclass/:id",controller.edit)
 router.post("/edit/:idclass/:id",controller.editPost)
 router.get("/mongiang" , controller.mongiang);
 router.get("/deleted/:idgv/:idmd",controller.deleted);
