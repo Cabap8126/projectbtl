@@ -1,16 +1,38 @@
 extends ../../Layout/layout.pug
+
 block main
-    h1 Danh sách lớp học
-    .row.mt-4 
+  .management-wrapper.py-4
+    .container-fluid
+      .page-header.mb-5.d-flex.justify-content-between.align-items-center
+        .header-left
+          h1.display-6.font-weight-bold Quản lý lớp học
+          p.text-muted.m-0 Chào Giảng viên, dưới đây là danh sách các lớp bạn đang phụ trách.
+        .header-stats.d-flex.gap-4
+          .stat-item.text-center
+            span.d-block.h4.m-0.font-weight-bold #{dsclass.length}
+            small.text-muted Lớp học
+
+      .row
         each item in dsclass
-            .col-6 
-                .card.mb-4 
-                    .card-header Lớp : #{item.nameCls} ( #{item.mamh} )
-                    .card-body.d-flex.justify-content-between.align-items-center
-                        a(href=`/gv/dssv/${item._id}`) Danh sách sinh viên lớp
-                        a(href=`/gv/file/${item._id}`) 
-                            i.fa-regular.fa-file 
-                        a(href=`/gv/notification/${item._id}`)
-                            i.fa-solid.fa-bell 
-
-
+          .col-xl-4.col-md-6.mb-4
+            .class-modern-card
+              .card-accent-line
+              .card-top
+                .subject-tag #{item.mamh}
+                h3.class-name #{item.nameCls}
+                p.student-count 
+                  i.fa-solid.fa-user-group.mr-2
+                  span Danh sách sinh viên
+              
+              .card-actions-grid
+                a.action-btn.primary(href=`/gv/dssv/${item._id}` title="Quản lý sinh viên")
+                  i.fa-solid.fa-users-viewfinder
+                  span Sinh viên
+                
+                .action-secondary
+                  a.action-btn.icon-only(href=`/gv/file/${item._id}` title="Tài liệu bài giảng")
+                    i.fa-regular.fa-folder-open
+                  
+                  a.action-btn.icon-only(href=`/gv/notification/${item._id}` title="Gửi thông báo")
+                    i.fa-solid.fa-bullhorn
+                    span.badge-notify

@@ -1,10 +1,15 @@
 header.header 
-    .container-fluid
-        .row.align-items-center
-            .col-3
-                .inner-logo 
-                    a(href="/gv/pagehome") Lecturer
-            .col-9 
-                div(class="text-right")
-                    a(href=`/gv/detail` class="btn btn-primary btn-sm mr-2") gv 
-                    a(href=`/auth/gv/logout` class="btn btn-danger btn-sm") Đăng Xuất
+.container-fluid
+    .header-wrapper
+      .inner-logo
+        a(href="/gv/pagehome")
+          i.fa-solid.fa-graduation-cap.mr-2
+          span EduPortal
+      
+      .inner-actions
+        .user-meta.mr-3
+          span.status-online
+          span.user-name #{user.tenGv}
+        a(href=`/auth/gv/logout` class="btn-logout")
+          i.fa-solid.fa-right-from-bracket
+          span Đăng Xuất

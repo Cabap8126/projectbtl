@@ -1,14 +1,25 @@
 extends ../../Layout/layout.pug
+
 block main
-    h1 Danh sách mon
-    .row.mt-4 
-        each item in dsgv
-            .col-6 
-                .card.mb-4 
-                    .card-header Lớp : #{item.nameCls} ( #{item.mamh} )
-                    .card-body.d-flex.justify-content-between.align-items-center
-                        p Tên giảng viên :  #{item.user}
-                        if(item.idroom)
-                            a(href=`/inbox/${item.idroom}`) Inbox
-                        else 
-                            a(href=`/dsgv`) Inbox
+  .inbox-container.py-4
+    .header-section.mb-4
+      h1.h3.font-weight-bold Hộp thư tin nhắn
+      p.text-muted Trao đổi trực tiếp với giảng viên bộ môn
+
+    .row
+      each item in dsgv
+        .col-lg-6.mb-3
+          .inbox-card
+            .inbox-left
+              .avatar-wrapper
+                img(src="/images/default-avatar.png", alt=item.user).avatar-img
+                span.status-dot.online
+              .user-details
+                h3.teacher-name #{item.user}
+                p.class-tag Lớp: #{item.nameCls} (#{item.mamh})
+            
+            .inbox-right
+              - var targetLink = item.idroom ? `/inbox/${item.idroom}` : `/dsgv`
+              a(href=targetLink).btn-inbox
+                i.fa-regular.fa-paper-plane
+                span Nhắn tin

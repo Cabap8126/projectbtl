@@ -1,14 +1,32 @@
 extends ../../Layout/layout.pug
+
 block main
-    h1 Danh sách mon
-    .row.mt-4 
-        each item in dsmon
-            .col-6 
-                .card.mb-4 
-                    .card-header Lớp : #{item.nameCls} ( #{item.mamh} )
-                    .card-body.d-flex.justify-content-between.align-items-center
-                        a(href=`/sv/diem/${item._id}`) Điểm
-                        a(href=`/sv/file/${item._id}`) 
-                            i.fa-regular.fa-file 
-                        a(href=`/sv/notification/${item._id}`)
-                            i.fa-solid.fa-bell 
+  .container-fluid.py-4
+    .header-section.mb-5
+      h1.display-5.font-weight-bold Danh sách môn học
+      p.text-muted Quản lý lớp học của bạn
+
+    .row
+      each item in dsmon
+        .col-xl-4.col-md-6.mb-4
+          .subject-card
+            .subject-header
+              .subject-icon
+                i.fas.fa-book-open
+              .subject-info
+                span.subject-code #{item.mamh}
+                h3.subject-name #{item.nameCls}
+            
+            .subject-body
+              .status-tag.active Đang diễn ra
+              .action-group
+                a.btn-action.view-grades(href=`/sv/diem/${item._id}` title="Xem điểm")
+                  i.fas.fa-chart-bar
+                  span Bảng điểm
+                
+                .secondary-actions
+                  a.btn-icon(href=`/sv/file/${item._id}` title="Tài liệu")
+                    i.fa-regular.fa-file-lines
+                  a.btn-icon(href=`/sv/notification/${item._id}` title="Thông báo")
+                    i.fa-solid.fa-bell
+                      span.dot-notify

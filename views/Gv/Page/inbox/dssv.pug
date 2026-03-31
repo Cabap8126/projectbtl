@@ -1,24 +1,39 @@
 extends ../../Layout/layout.pug
 include ../../mixins/alert.pug
+
 block main
+  .container-fluid.py-4
     +alert-success(5000)
     +alert-error(5000)
-    h1 Danh sách sinh viên 
-    table(class="table table-hover table-sm table-bordered table-dark")
-                thead  
-                    tr  
-                        th STT
-                        th Mã Sinh Viên
-                        th Tên Sinh Viên 
-                tbody 
-                    each item,index in dssv.dssv
-                        tr
-                            td #{index + 1}
-                            td #{item.masv}
-                            td #{item.tensv}
-                            if(item.room_id)
-                                td 
-                                    a(href=`/inbox/${item.room_id}` class="btn btn-warning btn-sm") Inbox
-                            else 
-                                td 
-                                    a(href=`/newinbox/${dssv.id}/${item.masv}` class="btn btn-warning btn-sm") Inbox 
+    .page-header.mb-4
+      h1.h3.font-weight-bold.text-dark 
+        i.fa-solid.fa-users.mr-2
+        | Danh sách sinh viên lớp
+      p.text-muted Quản lý và trao đổi trực tiếp với sinh viên trong danh sách.
+    .card.border-0.shadow-sm
+      .card-body.p-0
+        .table-responsive
+          table.table.table-modern.m-0
+            thead
+              tr
+                th.text-center(width="80px") STT
+                th(width="100px") Avatar
+                th Mã Sinh Viên
+                th Tên Sinh Viên
+                th.text-center Thao tác
+            tbody
+              each item, index in dssv.dssv
+                tr
+                  td.text-center.text-muted #{index + 1}
+                  td
+                    .avatar-wrapper
+                      img(src=`/images/default-avatar.png` alt=item.tensv).avatar-img
+                      span.status-indicator.online
+                  td
+                    span.badge-id #{item.masv}
+                  td.font-weight-bold #{item.tensv}
+                  td.text-center
+                    - var link = item.room_id ? `/inbox/${item.room_id}` : `/newinbox/${dssv.id}/${item.masv}`
+                    a(href=link class="btn-chat-action" title="Nhắn tin cho sinh viên")
+                      i.fa-solid.fa-comment-dots
+                      span Nhắn tin
