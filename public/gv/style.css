@@ -1,34 +1,85 @@
 .header {
-    background: rgba(28, 28, 28, 0.9); 
-    backdrop-filter: blur(15px);
+    background: rgba(28, 28, 28, 0.9);
+    backdrop-filter: blur(15px); 
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     padding: 12px 30px; 
     position: sticky;
     top: 0;
     z-index: 1000;
 }
-.header .container-fluid{
-    margin-right: auto;
-    margin-left: auto;
+.header .container-fluid {
+    max-width: none;
     width: 100%;
-    max-width: 1140px;
+    padding: 0;
 }
 
-.header .inner-logo a{
-    font-size: 24px;
-    font-weight: 700;
+.header-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.inner-logo a {
+    font-size: 22px;
+    font-weight: 800;
     color: #fff;
     text-decoration: none;
-}
-.header .inner-logo:hover a{
-    background: #6bf958;
-    color: #202020;
-    padding: 7px;
-    display: inline;
-    border-radius: 10px;
-    transition: 0.5s;
+    letter-spacing: -0.5px;
+    display: flex;
+    align-items: center;
 }
 
+.inner-logo i {
+    color: #3b82f6; /* Màu xanh accent */
+}
+
+/* Actions & User Info */
+.inner-actions {
+    display: flex;
+    align-items: center;
+}
+
+.user-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.user-name {
+    color: #cbd5e1;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.status-online {
+    width: 8px;
+    height: 8px;
+    background: #10b981;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #10b981;
+}
+
+/* Nút Đăng xuất hiện đại */
+.btn-logout {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    padding: 8px 16px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none !important;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-logout:hover {
+    background: #ef4444;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+    transform: translateY(-1px);
+}
 /* End Header */
 
 .body .sider{
@@ -556,17 +607,6 @@
     outline: none;
 }
 
-.header .container-fluid {
-    max-width: none; 
-    width: 100%;
-    padding: 0;
-}
-
-.header-wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
 .status-online {
     width: 8px;
     height: 8px;
@@ -708,4 +748,268 @@
 
 .table{
     border: 1px solid #000000;
+}
+.inbox-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.2s ease-in-out;
+}
+
+.inbox-card:hover {
+    transform: translateX(5px);
+    border-color: var(--accent-blue);
+    box-shadow: var(--glow);
+}
+
+/* Avatar and Info */
+.inbox-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.avatar-wrapper {
+    position: relative;
+    width: 50px;
+    height: 50px;
+}
+
+.avatar-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #e2e8f0;
+}
+
+.status-dot {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid var(--bg-card);
+}
+
+.status-dot.online { background: #10b981; } /* Xanh lá hoạt động */
+
+.teacher-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.class-tag {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+/* Action Button */
+.btn-inbox {
+    background: rgba(59, 130, 246, 0.1);
+    color: var(--accent-blue);
+    padding: 8px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+}
+
+.btn-inbox:hover {
+    background: var(--accent-blue);
+    color: #fff;
+    text-decoration: none;
+}
+
+.btn-inbox i {
+    font-size: 12px;
+}
+
+/* Card bao ngoài */
+.card-table-wrapper {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.card-header-custom {
+    padding: 15px 20px;
+    background: #f8fafc;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.badge-code {
+    background: #e2e8f0;
+    color: #475569;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+}
+.table-modern {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-modern thead th {
+    background: #f1f5f9;
+    color: #475569;
+    font-weight: 600;
+    font-size: 13px;
+    text-transform: uppercase;
+    padding: 12px 20px;
+    text-align: left;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.table-modern tbody td {
+    padding: 14px 20px;
+    border-bottom: 1px solid #f1f5f9;
+    font-size: 14px;
+    color: #1e293b;
+}
+
+/* Zebra Stripes */
+.table-modern tbody tr:nth-child(even) {
+    background: #fafafa;
+}
+
+.table-modern tbody tr:hover {
+    background: #f8fafc;
+}
+
+/* Status Tag */
+.status-tag {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 12px;
+    background: #f1f5f9;
+    color: #64748b;
+    border: 1px solid #e2e8f0;
+}
+
+/* Footer Summary */
+.table-modern tfoot td {
+    background: #f8fafc;
+    padding: 15px 20px;
+    border-top: 2px solid #e2e8f0;
+}
+.course-management-container {
+    padding: 20px;
+    background-color: #f8fafc;
+}
+
+.page-title {
+    font-size: 24px;
+    font-weight: 800;
+    color: #1e293b;
+    margin-bottom: 25px;
+}
+
+/* Card Modern */
+.card-modern {
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.04), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+    overflow: hidden;
+}
+
+.card-modern .card-header {
+    background-color: #fff;
+    border-bottom: 1px solid #f1f5f9;
+    padding: 1.25rem;
+}
+
+.header-text {
+    font-weight: 700;
+    color: #475569;
+}
+
+/* Nút Thêm môn */
+.btn-add-modern {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white !important;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.btn-add-modern:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+/* Table Modern */
+.table-modern {
+    margin-bottom: 0;
+}
+
+.table-modern thead th {
+    background-color: #f8fafc;
+    border-top: none;
+    border-bottom: 2px solid #e2e8f0;
+    color: #64748b;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    padding: 15px;
+}
+
+.table-modern tbody td {
+    padding: 18px 15px;
+    vertical-align: middle;
+    border-top: 1px solid #f1f5f9;
+}
+
+.table-modern tbody tr:hover {
+    background-color: #fcfcfd;
+}
+
+/* Badge Mã môn */
+.badge-code {
+    background-color: #eff6ff;
+    color: #1e40af;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-family: 'Monaco', 'Consolas', monospace;
+    font-size: 13px;
+}
+
+/* Nút Xóa hiện đại */
+.btn-delete-modern {
+    color: #ef4444;
+    text-decoration: none !important;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+    font-size: 14px;
+    transition: color 0.2s;
+}
+
+.btn-delete-modern:hover {
+    color: #dc2626;
+}
+
+.btn-delete-modern i {
+    font-size: 14px;
 }

@@ -1,25 +1,34 @@
 extends ../../Layout/layout.pug
-block main 
-    h1 Danh sách môn giảng
-    .card.mb-3
-        .card-header Danh sách
-        .card-body
-            .row
-                .col-8
-                .col-4.text-right
-                    a(href=`/gv/create/${monday._id}` class="btn btn-outline-success") + Thêm môn 
-            table(class="table table-hover table-sm table-bordered table-light" )
-                thead  
-                    tr  
-                        th STT
-                        th Môn giảng
-                        th Mã môn
-                        th Hành Động
-                tbody
-                    each item,index in monday.monday
-                        tr
-                            td #{index+1}
-                            td #{item.tenMd}
-                            td #{item.maMd}
-                            td
-                                a(href=`/gv/deleted/${monday._id}/${item.maMd}` class="btn btn-danger btn-sm-ml-1") Xóa
+
+block main
+  .course-management-container
+    h1.page-title Danh sách môn giảng
+    
+    .card.card-modern
+      .card-header.d-flex.justify-content-between.align-items-center
+        span.header-text
+          i.fa-solid.fa-list-ul.mr-2
+          | Danh sách chi tiết
+        a(href=`/gv/create/${monday._id}` class="btn btn-add-modern")
+          i.fa-solid.fa-plus.mr-2
+          | Thêm môn học
+      
+      .card-body.p-0
+        .table-responsive
+          table.table.table-modern
+            thead
+              tr  
+                th.text-center STT
+                th Môn giảng
+                th Mã môn
+                th.text-center Hành Động
+            tbody
+              each item, index in monday.monday
+                tr
+                  td.text-center.text-muted #{index + 1}
+                  td.font-weight-bold.text-dark #{item.tenMd}
+                  td: span.badge-code #{item.maMd}
+                  td.text-center
+                    a(href=`/gv/deleted/${monday._id}/${item.maMd}` class="btn-delete-modern")
+                      i.fa-solid.fa-trash-can
+                      span Xóa
